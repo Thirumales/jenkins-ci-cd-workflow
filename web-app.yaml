@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: myweb
+  name: myweb
+  namespace: jenkins-lts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myweb
+  template:
+    metadata:
+      labels:
+        app: myweb
+    spec:
+      containers:
+      - image: image-registry-harbor-registry.iks-get.harbor.com/library/api_go_jenkins_demo:<TAG>
+        imagePullPolicy: Always
+        name: myweb
